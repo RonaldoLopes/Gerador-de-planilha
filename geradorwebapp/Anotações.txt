@@ -1,0 +1,16 @@
+https://www.primefaces.org/primeng
+npm install @angular/cdk --save
+ngx bootstrapS
+ngx toast
+
+https://www.npmjs.com/package/ngx-mask
+
+https://material.angular.io/guide/getting-started
+
+npm i @auth0/angular-jwt
+
+guadião no angular diretorio auth(ng g g auth/auth)
+
+ng build --prod --source-map
+
+npm run start

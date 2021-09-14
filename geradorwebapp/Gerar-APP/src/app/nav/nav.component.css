@@ -1,0 +1,27 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    height: 100%;
+}
+#wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.smaller {
+    font-size: 0.7rem;
+}
+.z-0 {
+    z-index: 0;
+}
+
+.z-1 {
+    z-index: 1;
+}
+@media (min-width: 768px) {
+    .navbar-nav .form-inline .input-group {
+      width: auto;
+    }
+  }

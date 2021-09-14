@@ -1,0 +1,7 @@
+.txtFullData{    
+    font-weight: bold;
+    color: green;
+}
+textarea.txtFullData{
+    font-size: 30px;
+}

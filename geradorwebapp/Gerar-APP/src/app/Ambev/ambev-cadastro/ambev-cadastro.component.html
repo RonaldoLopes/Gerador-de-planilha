@@ -1,0 +1,237 @@
+<div class="container">
+  <div class="container-fluid">
+    <mat-card class="card">
+
+      <mat-card-header>
+        <mat-card-title>Ambev</mat-card-title>
+        <mat-card-subtitle>Cadastro Ambev</mat-card-subtitle>
+      </mat-card-header> 
+
+      <mat-card-content>
+
+        <form [formGroup]="registerForm">
+          <mat-tab-group>
+            <mat-tab label="Página 1">
+              <br>
+              <div class="form-row">
+
+                <div class="form-group col-md-2">
+                  <label for="">Cod.Planilha Controle</label>
+                  <input type="text" class="form-control" formControlName="codPlanControl"
+                    [ngClass]="{'is-invalid': registerForm.get('codPlanControl').errors && registerForm.get('codPlanControl').touched}">
+                    <div *ngIf="registerForm.get('codPlanControl').hasError('maxlength') && registerForm.get('codPlanControl').touched" class="invalid-feedback">
+                      Máximo de <strong>5 caracteres</strong>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="">Nome Planilha Controle</label>
+                  <input type="text" class="form-control" formControlName="nomPlaniControl"
+                    [ngClass]="{'is-invalid': registerForm.get('nomPlaniControl').errors && registerForm.get('nomPlaniControl').touched}">
+                  <div *ngIf="registerForm.get('nomPlaniControl').hasError('maxlength') && registerForm.get('nomPlaniControl').touched" class="invalid-feedback">
+                    Máximo de <strong>50 caracteres</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="">Cod. Grupo Item Planilha</label>
+                  <input type="text" class="form-control" formControlName="codGrupoItemPlani"
+                    [ngClass]="{'is-invalid': registerForm.get('codGrupoItemPlani').errors && registerForm.get('codGrupoItemPlani').touched}">
+                  <div *ngIf="registerForm.get('codGrupoItemPlani').hasError('maxlength') && registerForm.get('codGrupoItemPlani').touched" class="invalid-feedback">
+                    Máximo de <strong>50 caracteres</strong>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-6">
+                  <label for="">Nom. Grupo Item Planilha</label>
+                  <input type="text" class="form-control" formControlName="nomGrupoItemPlani"
+                    [ngClass]="{'is-invalid': registerForm.get('nomGrupoItemPlani').errors && registerForm.get('nomGrupoItemPlani').touched}">
+                    <div *ngIf="registerForm.get('nomGrupoItemPlani').hasError('maxlength') && registerForm.get('nomGrupoItemPlani').touched" class="invalid-feedback">
+                      Máximo de <strong>50 caracteres</strong>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="">Cod. item controle</label>
+                  <input type="text" class="form-control" formControlName="codItemControle"
+                  [ngClass]="{'is-invalid': registerForm.get('codItemControle').errors && registerForm.get('codItemControle').touched}">
+                  <div *ngIf="registerForm.get('codItemControle').hasError('maxlength') && registerForm.get('codItemControle').touched" class="invalid-feedback">
+                    Máximo de <strong>50 caracteres</strong>
+                  </div>
+                </div>
+                
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-8">
+                  <label for="">Nome item controle</label>
+                  <textarea name=""  cols="10" rows="3" class="form-control" formControlName="nomeItemControle"
+                  [ngClass]="{'is-invalid': registerForm.get('nomeItemControle').errors && registerForm.get('nomeItemControle').touched}"></textarea>
+                  <div *ngIf="registerForm.get('nomeItemControle').hasError('maxlength') && registerForm.get('nomeItemControle').touched" class="invalid-feedback">
+                    Máximo de <strong>300 caracteres</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="">Cod. item planilha</label>
+                  <input type="text" class="form-control" formControlName="codItemPlanilha"
+                    [ngClass]="{'is-invalid': registerForm.get('codItemPlanilha').errors && registerForm.get('codItemPlanilha').touched}">
+                  <div *ngIf="registerForm.get('codItemPlanilha').hasError('maxlength') && registerForm.get('codItemPlanilha').touched" class="invalid-feedback">
+                    Máximo de <strong>50 caracteres</strong>
+                  </div>
+                </div>
+                
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-4">
+                  <label for="">CCP / ICL?</label>
+                  <input type="text" class="form-control" formControlName="ccP_ICL"
+                  [ngClass]="{'is-invalid': registerForm.get('ccP_ICL').errors && registerForm.get('ccP_ICL').touched}">
+                  <div *ngIf="registerForm.get('ccP_ICL').hasError('maxlength') && registerForm.get('ccP_ICL').touched" class="invalid-feedback">
+                    Máximo de <strong>50 caracteres</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="">Obrigatório</label>            
+                  <select class="form-control" formControlName="obrigatorio">
+                    <option>SIM</option>  
+                    <option>NÃO</option>      
+                  </select>
+                  
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="">Espefic. / Historico</label>
+                  <textarea name=""  cols="10" rows="3" class="form-control" formControlName="especifiHistorico"
+                  [ngClass]="{'is-invalid': registerForm.get('especifiHistorico').errors && registerForm.get('especifiHistorico').touched}"></textarea>
+                  <div *ngIf="registerForm.get('especifiHistorico').hasError('maxlength') && registerForm.get('especifiHistorico').touched" class="invalid-feedback">
+                    Máximo de <strong>250 caracteres</strong>
+                  </div>
+                </div>
+                
+              </div>
+            </mat-tab>
+
+            <mat-tab label="Página 2">
+              <br>
+              <div class="form-row">
+
+                <div class="form-group col-md-8">
+                  <label for="">Regra de coleta automação</label>
+                  <input type="text" class="form-control" formControlName="regraColetaAutoma"
+                    [ngClass]="{'is-invalid': registerForm.get('regraColetaAutoma').errors && registerForm.get('regraColetaAutoma').touched}">
+                    <div *ngIf="registerForm.get('regraColetaAutoma').hasError('maxlength') && registerForm.get('regraColetaAutoma').touched" class="invalid-feedback">
+                      Máximo de <strong>150 caracteres</strong>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="">UM</label>            
+                  <select class="form-control" formControlName="umId"              
+                    [ngClass]="{'is-invalid': registerForm.get('umId').errors && registerForm.get('umId').touched}"
+                    >
+                    <option *ngFor="let um of ums" value="{{um.id}}">
+                      {{um.sigla}}
+                    </option>            
+                  </select>
+                  <div *ngIf="registerForm.get('umId').hasError('required')" class="invalid-feedback">
+                    Campo <strong>obrigatório</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="">Tipo Variável</label>            
+                  <select class="form-control" formControlName="tipoVariavelId"              
+                    [ngClass]="{'is-invalid': registerForm.get('tipoVariavelId').errors && registerForm.get('tipoVariavelId').touched}"
+                    >
+                    <option *ngFor="let tp of tipoVariaveis" value="{{tp.id}}">
+                      {{tp.descricao}}
+                    </option>            
+                  </select>
+                  <div *ngIf="registerForm.get('tipoVariavelId').hasError('required')" class="invalid-feedback">
+                    Campo <strong>obrigatório</strong>
+                  </div>
+                </div>
+                
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-6">
+                  <label for="">Comentário Ambev</label>
+                  <textarea name=""  cols="10" rows="3" class="form-control" formControlName="comentarioAmbev"
+                  [ngClass]="{'is-invalid': registerForm.get('comentarioAmbev').errors && registerForm.get('comentarioAmbev').touched}"></textarea>
+                  <div *ngIf="registerForm.get('comentarioAmbev').hasError('maxlength') && registerForm.get('comentarioAmbev').touched" class="invalid-feedback">
+                    Máximo de <strong>400 caracteres</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="">Frequência(WorkFlow)</label>
+                  <textarea name=""  cols="10" rows="3" class="form-control" formControlName="frequenciaWorkf"
+                  [ngClass]="{'is-invalid': registerForm.get('frequenciaWorkf').errors && registerForm.get('frequenciaWorkf').touched}"></textarea>
+                  <div *ngIf="registerForm.get('frequenciaWorkf').hasError('maxlength') && registerForm.get('frequenciaWorkf').touched" class="invalid-feedback">
+                    Máximo de <strong>350 caracteres</strong>
+                  </div>
+                </div>
+                
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-6">
+                  <label for="">Condições básicas(WorkFlow)</label>
+                  <textarea name=""  cols="10" rows="3" class="form-control" formControlName="condBasicaWorkFlo"
+                  [ngClass]="{'is-invalid': registerForm.get('condBasicaWorkFlo').errors && registerForm.get('condBasicaWorkFlo').touched}"></textarea>
+                  <div *ngIf="registerForm.get('condBasicaWorkFlo').hasError('maxlength') && registerForm.get('condBasicaWorkFlo').touched" class="invalid-feedback">
+                    Máximo de <strong>100 caracteres</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="">Condições Especiais(WorkFlow)</label>
+                  <textarea name=""  cols="10" rows="3" class="form-control" formControlName="condEspeciWorkFlo"
+                  [ngClass]="{'is-invalid': registerForm.get('condEspeciWorkFlo').errors && registerForm.get('condEspeciWorkFlo').touched}"></textarea>
+                  <div *ngIf="registerForm.get('condEspeciWorkFlo').hasError('maxlength') && registerForm.get('condEspeciWorkFlo').touched" class="invalid-feedback">
+                    Máximo de <strong>150 caracteres</strong>
+                  </div>
+                </div>
+                
+              </div>
+            
+              <div class="form-row">
+
+                <div class="form-group col-md-6">
+                  <label for="">Valor Coletado(WorkFlow)</label>
+                  <input type="text" class="form-control" formControlName="valorColetadoWorFlo"
+                  [ngClass]="{'is-invalid': registerForm.get('valorColetadoWorFlo').errors && registerForm.get('valorColetadoWorFlo').touched}">
+                  <div *ngIf="registerForm.get('valorColetadoWorFlo').hasError('maxlength') && registerForm.get('valorColetadoWorFlo').touched" class="invalid-feedback">
+                    Máximo de <strong>10 caracteres</strong>
+                  </div>
+                </div>
+                
+              </div>
+            </mat-tab>
+          </mat-tab-group>
+        </form>     
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="salvarAlteracao()">
+          <mat-icon>sd_storage</mat-icon>
+          Salvar Alterações
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+  </div>
+</div>
+

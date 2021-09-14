@@ -1,0 +1,33 @@
+no pacote repository
+pomelo.entityframeworkcore.mysql para mysql 
+entityframeworkcore.tools
+entityframeworkcore.proxies para lazy loading
+
+DDD-> domain drive design
+
+No API, criar arquivo de conexão, adicionar novo item .json, arquivo de configuracao do aplicativo
+adicionar criação do banco no startup.cs
+
+migration somente no projeto onde está o entityframeworkcore, verificar no console do gerenciador de pacotes se o projeto está selecionado corretamente
+
+adicionar config.json a compilacao
+1-> botaõ direito->propriedades->copiar para diretorio de saida
+
+executar migrations pelo tools
+1.exibir->outras janelas->linha de comando nuget
+1.1. get-help entityframeworkcore
+1.2. Add-Migration initial
+1.3. update-database
+1.4 script-migration ->gera um arquivo no visual studio com toda criação do banco
+
+Autommaper
+DTO->data transfer object
+nuget -> AutoMapper.Extensions.Microsoft.DependencyInjection -> instalar no API
+Criar helpers dentro da API
+Colocar no startup
+
+IdentityContext
+Microsoft.aspnetcore.identity.entityframeworkcore
+instalar no domain
+
+microsoft.aspnetcore.authentication.jwtBeaer

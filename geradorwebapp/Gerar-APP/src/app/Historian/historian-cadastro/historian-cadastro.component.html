@@ -1,0 +1,704 @@
+
+<div class="container">
+  <div class="container-fluid">
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title>Historian</mat-card-title>
+        <mat-card-subtitle>Dados Historian</mat-card-subtitle>
+      </mat-card-header> 
+
+      <mat-card-content>
+
+        <form [formGroup]="registerForm">
+
+          <mat-tab-group>
+            <mat-tab label="Gerais">
+
+              <br>
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <h5>Dados configuração</h5>
+                  <hr class="style1">
+                </div>   
+              </div>
+              
+              <div class="form-row">
+
+                <div class="form-group col-md-2">
+                  
+                  <label for="">Configurações ID</label>
+                  <div class="form-group input-group mb-2">
+                    <input type="text" class="form-control" placeholder="Id" readonly formControlName="configuracaoId"
+                    [ngClass]="{'is-invalid': registerForm.get('configuracaoId').errors && registerForm.get('configuracaoId').touched}">
+                    <div class="input-group-append">
+                      <button class="btn btn-sm btn-primary" type="button" id="pesquisarConf" (click)="getConfiguracao(); openModal(templateCFG)">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                    <div *ngIf="registerForm.get('configuracaoId').hasError('required')" class="invalid-feedback">
+                      Config. <strong>obrigatória</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="">Planta</label>
+                  <input type="text" class="form-control" readonly placeholder="Planta" formControlName="planta">
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="">Linha</label>
+                  <input type="text" class="form-control" readonly placeholder="Linha" formControlName="linha"
+                  [(ngModel)]="localInstalSAP.linha">
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="">Sigla</label>
+                  <input type="text" class="form-control" readonly placeholder="Sigla" formControlName="sigla"
+                  [(ngModel)] = "localInstalSAP.siglas">
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="">Servidor</label>
+                  <input type="text" class="form-control" readonly placeholder="Servidor" formControlName="servidor"
+                  [(ngModel)] = "tagHistorian.servidor"
+                    [ngClass]="{'is-invalid': registerForm.get('servidor').errors && registerForm.get('servidor').touched}">
+                  <div *ngIf="registerForm.get('sigla').hasError('required')" class="invalid-feedback">
+                    Servidor <strong>obrigatório</strong>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-12">
+                  <h5>Dados Ambev</h5>
+                  <hr class="style1">
+                </div> 
+
+                <div class="form-group col-md-2">
+                  
+                  <label for="">Ambev ID</label>
+                  <div class="form-group input-group mb-2">
+                    <input type="text" class="form-control" placeholder="Id" readonly formControlName="ambevId"
+                    [ngClass]="{'is-invalid': registerForm.get('ambevId').errors && registerForm.get('ambevId').touched}">
+                    <div class="input-group-append">
+                      <button class="btn btn-sm btn-primary" type="button" id="pesquisarABV" (click)="getAmbev();openModal(templateABV)">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                    <div *ngIf="registerForm.get('ambevId').hasError('required')" class="invalid-feedback">
+                      Ambev. <strong>obrigatória</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="">Nome Plan. Controle</label>
+                  <input type="text" class="form-control" readonly placeholder="Nome Plan. Controle" formControlName="nomPlaniControl"
+                    [(ngModel)]="descricaoHist.pprMes">
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="">Nome Item Controle</label>
+                  <input type="text" class="form-control" readonly placeholder="Nome Item Controle" formControlName="nItemControle"
+                    [(ngModel)]="comenHist.nitemcontrol">
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="">Cod. Item Planilha</label>
+                  <input type="text" class="form-control" readonly placeholder="Cod. Item Planilha" formControlName="codItemPlanilha"
+                    [(ngModel)] = "descricaoHist.cdItemPla">
+                </div>
+
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-12">
+                  <h5>Dados PLC</h5>
+                  <hr class="style1">
+                </div> 
+
+                <div class="form-group col-md-2">
+                  
+                  <label for="">Dados PLC</label>
+                  <div class="form-group input-group mb-2">
+                    <input type="text" class="form-control" placeholder="Id" readonly formControlName="plcId"
+                    [ngClass]="{'is-invalid': registerForm.get('plcId').errors && registerForm.get('plcId').touched}">
+                    <div class="input-group-append">
+                      <button class="btn btn-sm btn-primary" type="button" id="pesquisarPLC" (click)="getPLC();openModal(templatePLC)" >
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                    <div *ngIf="registerForm.get('plcId').hasError('required')" class="invalid-feedback">
+                      PLC é <strong>obrigatório</strong>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="">IP</label>
+                  <input type="text" class="form-control" readonly placeholder="IP" formControlName="ip"
+                  [ngClass]="{'is-invalid': registerForm.get('ip').errors && registerForm.get('ip').touched}">
+                  <div *ngIf="registerForm.get('ip').hasError('required')" class="invalid-feedback">
+                    IP é <strong>obrigatório</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="">Descrição PLC</label>
+                  <input type="text" class="form-control" readonly placeholder="Descrição PLC" formControlName="plcDesc"
+                  [(ngModel)] = "localInstalSAP.plcDes"
+                  [ngClass]="{'is-invalid': registerForm.get('plcDesc').errors && registerForm.get('plcDesc').touched}">
+                  <div *ngIf="registerForm.get('plcDesc').hasError('required')" class="invalid-feedback">
+                    Descrição PLC é <strong>obrigatório</strong>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="">Endereço OPC Completo</label>
+                  <textarea class="form-control txtFullData" cols="10" rows="2" readonly formControlName="enderecoOPCFull"></textarea>
+                </div>
+              </div>
+              
+            </mat-tab>
+
+
+            <mat-tab label="Dados">
+              <br>
+              <div class="form-row">
+
+                <div class="form-group col-md-6">
+                  <label for="">N. Intrumentação</label>
+                  <input type="text" class="form-control" formControlName="nivelInstru"
+                  [ngClass]="{'is-invalid': registerForm.get('nivelInstru').errors && registerForm.get('nivelInstru').touched}"/>
+                  <div *ngIf="registerForm.get('nivelInstru').hasError('required')" class="invalid-feedback">
+                    N. Intrumentação é <strong>obrigatória</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('nivelInstru').hasError('minlength') && registerForm.get('nivelInstru').touched" class="invalid-feedback">
+                    Mínimo de <strong>2 caracteres</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('nivelInstru').hasError('maxlength') && registerForm.get('nivelInstru').touched" class="invalid-feedback">
+                    Máximo de <strong>55 caracteres</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="">L.(2° ou 3° n.SAP)</label>
+                  <input type="text" class="form-control" formControlName="local23NivelSAP"    
+                  [(ngModel)] = "localInstalSAP.local23" (focusout)="validLInstalSAP()"              
+                  [ngClass]="{'is-invalid': registerForm.get('local23NivelSAP').errors && registerForm.get('local23NivelSAP').touched}"/>
+                  <div *ngIf="registerForm.get('local23NivelSAP').hasError('maxlength') && registerForm.get('local23NivelSAP').touched" class="invalid-feedback">
+                    Máximo de <strong>45 caracteres</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="">Iniciativa</label>
+                  <select class="form-control"  formControlName="iniciativa"
+                    (focusout)="validDesc()"
+                    [(ngModel)] = "descricaoHist.inic"
+                    [ngClass]="{'is-invalid': registerForm.get('iniciativa').errors && registerForm.get('iniciativa').touched}">
+                    <option value="MES">MES</option>
+                    <option value="LMS">LMS</option>
+                  </select>
+                  <div *ngIf="registerForm.get('iniciativa').hasError('required')" class="invalid-feedback">
+                    Iniciativa é <strong>obrigatório</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="">Ponto Produtivo MES</label>
+                  <input type="text" class="form-control" formControlName="pProdMes"
+                  [ngClass]="{'is-invalid': registerForm.get('pProdMes').errors && registerForm.get('pProdMes').touched}">
+                  <div *ngIf="registerForm.get('pProdMes').hasError('maxlength') && registerForm.get('pProdMes').touched" class="invalid-feedback">
+                    Máximo de <strong>10 caracteres</strong>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-row">
+                
+                <div class="form-group col-md-12">
+                  <label for="">Validação TAG Historian</label>
+                  <input type="text" class="form-control" formControlName="validTagHistorian"
+                  [ngClass]="{'is-invalid': registerForm.get('validTagHistorian').errors && registerForm.get('validTagHistorian').touched}">
+                  <div *ngIf="registerForm.get('validTagHistorian').hasError('maxlength') && registerForm.get('validTagHistorian').touched" class="invalid-feedback">
+                    Máximo de <strong>45 caracteres</strong>
+                  </div>
+                </div>                
+
+              </div>
+
+              <div class="form-row">
+                
+                <div class="form-group col-md-6">
+                  <label for="">Evidência</label>
+                  <input type="text" class="form-control" formControlName="evidencia"
+                  [ngClass]="{'is-invalid': registerForm.get('evidencia').errors && registerForm.get('evidencia').touched}">
+                  <div *ngIf="registerForm.get('evidencia').hasError('maxlength') && registerForm.get('evidencia').touched" class="invalid-feedback">
+                    Máximo de <strong>100 caracteres</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-3">
+                  <label for="">Abrev. Maq.</label>
+                  <input type="text" class="form-control" formControlName="abrevMaquina"
+                    [ngClass]="{'is-invalid': registerForm.get('abrevMaquina').errors && registerForm.get('abrevMaquina').touched}">
+                    <div *ngIf="registerForm.get('abrevMaquina').hasError('required')" class="invalid-feedback">
+                      Abrev. Maq. é <strong>obrigatório</strong>
+                    </div>
+                    <div *ngIf="registerForm.get('abrevMaquina').hasError('minlength') && registerForm.get('abrevMaquina').touched" class="invalid-feedback">
+                      Mínimo de <strong>2 caracteres</strong>
+                    </div>
+                    <div *ngIf="registerForm.get('abrevMaquina').hasError('maxlength') && registerForm.get('abrevMaquina').touched" class="invalid-feedback">
+                      Máximo de <strong>5 caracteres</strong>
+                    </div>
+                </div>         
+                
+                <div class="form-group col-md-3">
+                  <label for="">Num. Maq.</label>
+                  <input type="text" class="form-control" formControlName="numMaquina"
+                  [ngClass]="{'is-invalid': registerForm.get('numMaquina').errors && registerForm.get('numMaquina').touched}">
+                  <div *ngIf="registerForm.get('numMaquina').hasError('required')" class="invalid-feedback">
+                    Evidência é <strong>obrigatório</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('numMaquina').hasError('minlength') && registerForm.get('numMaquina').touched" class="invalid-feedback">
+                    Mínimo de <strong>2 caracteres</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('numMaquina').hasError('maxlength') && registerForm.get('numMaquina').touched" class="invalid-feedback">
+                    Máximo de <strong>5 caracteres</strong>
+                  </div>
+                </div> 
+
+              </div>
+
+              <div class="form-row">
+                
+                <div class="form-group col-md-12">
+                  <label for="">Comentário final</label>
+                  <input type="text" class="form-control" formControlName="comentaFinal" 
+                  [ngClass]="{'is-invalid': registerForm.get('comentaFinal').errors && registerForm.get('comentaFinal').touched}">
+                  <div *ngIf="registerForm.get('comentaFinal').hasError('required')" class="invalid-feedback">
+                    Comentário final é <strong>obrigatório</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('comentaFinal').hasError('minlength') && registerForm.get('comentaFinal').touched" class="invalid-feedback">
+                    Mínimo de <strong>2 caracteres</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('comentaFinal').hasError('maxlength') && registerForm.get('comentaFinal').touched" class="invalid-feedback">
+                    Máximo de <strong>100 caracteres</strong>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-row">
+                
+                <div class="form-group col-md-12">
+                  <label for="">Local da instalação SAP completo</label>
+                  <textarea class="form-control txtFullData" readonly cols="10" rows="2" formControlName="lInstalacao" 
+                    [(ngModel)]="comenHist.linstalsap"
+                    (focusout)="validComentHist()"
+                    [ngClass]="{'is-invalid': registerForm.get('lInstalacao').errors && registerForm.get('lInstalacao').touched}" value>
+                    
+                  </textarea>
+                  <div *ngIf="registerForm.get('lInstalacao').hasError('required')" class="invalid-feedback">
+                    Local da instalação SAP completo é <strong>obrigatório</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('lInstalacao').hasError('minlength') && registerForm.get('lInstalacao').touched" class="invalid-feedback">
+                    Mínimo de <strong>2 caracteres</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('lInstalacao').hasError('maxlength') && registerForm.get('lInstalacao').touched" class="invalid-feedback">
+                    Máximo de <strong>100 caracteres</strong>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <label for="">Comentário Historian</label>
+                  <textarea class="form-control txtFullData" cols="10" rows="2" formControlName="comentarioHistoria" readonly
+                    [ngClass]="{'is-invalid': registerForm.get('comentarioHistoria').errors && registerForm.get('comentarioHistoria').touched}">
+                  </textarea>
+                  <div *ngIf="registerForm.get('comentarioHistoria').hasError('required')" class="invalid-feedback">
+                    Comentário Historian é <strong>obrigatório</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('comentarioHistoria').hasError('minlength') && registerForm.get('comentarioHistoria').touched" class="invalid-feedback">
+                    Mínimo de <strong>2 caracteres</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('comentarioHistoria').hasError('maxlength') && registerForm.get('comentarioHistoria').touched" class="invalid-feedback">
+                    Máximo de <strong>255 caracteres</strong>
+                  </div>
+                </div>
+
+              </div>
+
+            </mat-tab>   
+
+            <mat-tab label="Planilha">
+              <br>
+              <div class="form-row">
+
+                <div class="form-group col-md-2">
+                  <label for="">EGU</label>
+                  <select class="form-control" formControlName="umId"
+                    [ngClass]="{'is-invalid': registerForm.get('umId').errors && registerForm.get('umId').touched}">
+                    <option *ngFor="let um of ums" value="{{um.id}}">
+                      {{um.sigla}}
+                    </option>
+                  </select>
+                  <div *ngIf="registerForm.get('umId').hasError('required')" class="invalid-feedback">
+                    EGU é <strong>obrigatória</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="">Var/DataType</label>
+                  <select class="form-control" formControlName="tipoVariavelId" [(ngModel)] = "tagHistorian.variavel"
+                  (focusout)="validTagHistorian()" 
+                    [ngClass]="{'is-invalid': registerForm.get('tipoVariavelId').errors && registerForm.get('tipoVariavelId').touched}">
+                    <option *ngFor="let tp of tipoVariaveis " value="{{tp.id}}" >
+                      {{tp.descricao}}
+                    </option>
+                  </select>
+                  <div *ngIf="registerForm.get('tipoVariavelId').hasError('required')" class="invalid-feedback">
+                    Var/DataType é <strong>obrigatória</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="">T. Out Compre. Coletor</label>
+                  <input type="number" class="form-control" formControlName="collectorCompressorTimeOut"
+                  [ngClass]="{'is-invalid': registerForm.get('collectorCompressorTimeOut').errors && registerForm.get('collectorCompressorTimeOut').touched}">
+                  <div *ngIf="registerForm.get('collectorCompressorTimeOut').hasError('required')" class="invalid-feedback">
+                    T. Out Compre. Coletor é <strong>obrigatório</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="">Intevalo de coleta</label>
+                  <input type="number" class="form-control" formControlName="collectionInterval" 
+                    [ngClass]="{'is-invalid': registerForm.get('collectionInterval').errors && registerForm.get('collectionInterval').touched}">
+                    <div *ngIf="registerForm.get('collectionInterval').hasError('required')" class="invalid-feedback">
+                      Intevalo de coleta é <strong>obrigatório</strong>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label for="">Tipo de Coleta</label>
+                  <select class="form-control" formControlName="collectionType"
+                  [ngClass]="{'is-invalid': registerForm.get('collectionType').errors && registerForm.get('collectionType').touched}">
+                    <option value="Polled">Polled</option>
+                    <option value="Unsolicited">Unsolicited</option>
+                  </select>
+                  <div *ngIf="registerForm.get('collectionType').hasError('required')" class="invalid-feedback">
+                    Tipo de Coleta é <strong>obrigatório</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-2">
+                  <br><br>
+                  <mat-checkbox formControlName="collectorCompression" [(ngModel)]="comprimeColetor"
+                  color="primary">Comprime coletor?</mat-checkbox>
+                </div>
+
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-4">
+                  <label for="">C.r Deadband Perc. Range</label>
+                  <input type="number" class="form-control" formControlName="collectDeadPercenRange"
+                  [ngClass]="{'is-invalid': registerForm.get('collectDeadPercenRange').errors && registerForm.get('collectDeadPercenRange').touched}">
+                  <div *ngIf="registerForm.get('collectDeadPercenRange').hasError('required')" class="invalid-feedback">
+                    C.r Deadband Perc. Range é <strong>obrigatório</strong>
+                  </div>
+                </div>
+
+                <div class="form-group col-md-4">
+                  <label for="">HiScale</label>
+                  <input type="number" class="form-control" formControlName="hiScale">                 
+                </div>
+
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-12">
+                  <label for="">Collector Name</label>
+                  <input type="text" class="form-control" formControlName="collectorName"
+                  [ngClass]="{'is-invalid': registerForm.get('collectorName').errors && registerForm.get('collectorName').touched}">
+                  <div *ngIf="registerForm.get('collectorName').hasError('required')" class="invalid-feedback">
+                    Collector Name é <strong>obrigatório</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('collectorName').hasError('minlength') && registerForm.get('collectorName').touched" class="invalid-feedback">
+                    Mínimo de <strong>2 caracteres</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('collectorName').hasError('maxlength') && registerForm.get('collectorName').touched" class="invalid-feedback">
+                    Máximo de <strong>150 caracteres</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-12">
+                  <label for="">Comentário Historian</label>
+                  <textarea class="form-control txtFullData" cols="10" rows="2" formControlName="comentarioHistoria" readonly
+                    [ngClass]="{'is-invalid': registerForm.get('comentarioHistoria').errors && registerForm.get('comentarioHistoria').touched}">
+                  </textarea>
+                  <div *ngIf="registerForm.get('comentarioHistoria').hasError('required')" class="invalid-feedback">
+                    Comentário Historian é <strong>obrigatório</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('comentarioHistoria').hasError('minlength') && registerForm.get('comentarioHistoria').touched" class="invalid-feedback">
+                    Mínimo de <strong>2 caracteres</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('comentarioHistoria').hasError('maxlength') && registerForm.get('comentarioHistoria').touched" class="invalid-feedback">
+                    Máximo de <strong>255 caracteres</strong>
+                  </div>
+                </div>               
+
+              </div>
+
+              <div class="form-row">
+
+                <div class="form-group col-md-6">
+                  <label for="">Tag Historian</label>
+                  <textarea class="form-control txtFullData" cols="10" rows="2" readonly formControlName="tagHistorian"
+                    [ngClass]="{'is-invalid': registerForm.get('tagHistorian').errors && registerForm.get('tagHistorian').touched}"></textarea>
+                    <div *ngIf="registerForm.get('tagHistorian').hasError('required')" class="invalid-feedback">
+                      Local da instalação SAP completo é <strong>obrigatório</strong>
+                    </div>
+                    <div *ngIf="registerForm.get('tagHistorian').hasError('minlength') && registerForm.get('tagHistorian').touched" class="invalid-feedback">
+                      Mínimo de <strong>2 caracteres</strong>
+                    </div>
+                    <div *ngIf="registerForm.get('tagHistorian').hasError('maxlength') && registerForm.get('tagHistorian').touched" class="invalid-feedback">
+                      Máximo de <strong>150 caracteres</strong>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                  <label for="">Descrição</label>
+                  <textarea class="form-control txtFullData" cols="10" rows="2" formControlName="descricao" readonly
+                    [ngClass]="{'is-invalid': registerForm.get('descricao').errors && registerForm.get('descricao').touched}">
+                  </textarea>
+                  <div *ngIf="registerForm.get('descricao').hasError('required')" class="invalid-feedback">
+                    Descrição é <strong>obrigatório</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('descricao').hasError('minlength') && registerForm.get('descricao').touched" class="invalid-feedback">
+                    Mínimo de <strong>2 caracteres</strong>
+                  </div>
+                  <div *ngIf="registerForm.get('descricao').hasError('maxlength') && registerForm.get('descricao').touched" class="invalid-feedback">
+                    Máximo de <strong>150 caracteres</strong>
+                  </div> 
+                </div>
+
+              </div>
+
+            </mat-tab>         
+            
+          </mat-tab-group>
+        </form>        
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="salvarAlteracao()">
+          <mat-icon>sd_storage</mat-icon>Salvar Alterações
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+<div bsModal #templatePLC="bs-modal" class="modal fade" tabindex="-1"
+     role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">Dados PLC</h4>
+        <button type="button" class="close pull-right" (click)="templatePLC.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-container">
+
+          <mat-form-field>
+            <input matInput (keyup)="applyFilterPLC($event.target.value)" placeholder="Filtrar Dados">
+          </mat-form-field>
+          <mat-table mat-table [dataSource]="dataSourcePLC" matSort>
+          
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+              <td mat-cell *matCellDef="let plc">{{plc.id}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="ip">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>IP</th>
+              <td mat-cell *matCellDef="let plc">{{plc.ip}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="plcDesc">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</th>
+              <td mat-cell *matCellDef="let plc">{{plc.plcDesc}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="enderecoOPCFull">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>EndOPCFull</th>
+              <td mat-cell *matCellDef="let plc">{{plc.enderecoOPCFull}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="opcoes">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Opções</th>
+              <td mat-cell *matCellDef="let plc">
+                <button mat-raised-button color="primary" tooltip="Selectionar" (click)="dadosSelecionadosPLC(plc)"><mat-icon>create</mat-icon></button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsPLC"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsPLC;"></tr>
+
+          </mat-table>
+          <mat-paginator #paginator3
+                      [pageSize]="5"
+                      [pageSizeOptions]="[5]">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div bsModal #templateABV="bs-modal" class="modal fade" tabindex="-1"
+     role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">Dados Ambev</h4>
+        <button type="button" class="close pull-right" (click)="templateABV.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-container">
+          
+          <mat-form-field>
+            <input matInput (keyup)="applyFilterABV($event.target.value)" placeholder="Filtrar Dados">
+          </mat-form-field>
+
+          <mat-table [dataSource]="dataSourceABV">
+          
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>Id</th>
+              <td mat-cell *matCellDef="let abv">{{abv.id}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="pProdMes">
+              <th mat-header-cell *matHeaderCellDef>P.ProdMes</th>
+              <td mat-cell *matCellDef="let abv">{{abv.pProdMes}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="nomPlaniControl">
+              <th mat-header-cell *matHeaderCellDef>N. Planilha Control</th>
+              <td mat-cell *matCellDef="let abv">{{abv.nomPlaniControl}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="codItemPlanilha">
+              <th mat-header-cell *matHeaderCellDef>Cod. Item planilha</th>
+              <td mat-cell *matCellDef="let abv">{{abv.codItemPlanilha}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="nomeItemControle">
+              <th mat-header-cell *matHeaderCellDef>Nome Item Controle</th>
+              <td mat-cell *matCellDef="let abv">{{abv.nomeItemControle}}</td>
+            </ng-container>
+            
+            <ng-container matColumnDef="opcoes">
+              <th mat-header-cell *matHeaderCellDef>Opções</th>
+              <td mat-cell *matCellDef="let abv">
+                <button mat-raised-button color="primary" tooltip="Selectionar" (click)="dadosSelecionadoAbv(abv)"><mat-icon>create</mat-icon></button>  
+              </td>
+            </ng-container>            
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsABV"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsABV;"></tr>
+
+          </mat-table>
+          <mat-paginator #paginator2
+                      [pageSize]="5"
+                      [pageSizeOptions]="[5]">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div bsModal #templateCFG="bs-modal" class="modal fade" tabindex="-1"
+  role="dialog" aria-labelledby="dialog-sizes-name1">
+<div class="modal-dialog modal-lg modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h4 id="dialog-sizes-name1" class="modal-title pull-left">Dados Configuracao</h4>
+      <button type="button" class="close pull-right" (click)="templateCFG.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+
+     <div class="table-container">
+
+        <mat-form-field>
+          <input matInput (keyup)="applyFilterCFG($event.target.value)" placeholder="Filtrar Dados">
+        </mat-form-field>
+
+        <mat-table [dataSource]="dataSourceCfg" matSort>
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+            <td mat-cell *matCellDef="let cfg">{{cfg.id}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="planta">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Planta</th>
+            <td mat-cell *matCellDef="let cfg">{{cfg.planta}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="linha">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Linha</th>
+            <td mat-cell *matCellDef="let cfg">{{cfg.linha}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="plantaReduzida">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>P.reduzida</th>
+            <td mat-cell *matCellDef="let cfg">{{cfg.plantaReduzida}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="opcoes">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Opções</th>
+            <td mat-cell *matCellDef="let cfg">
+              <button mat-raised-button color="primary" tooltip="Selectionar" (click)="dadosSelecionadoConf(cfg)"><mat-icon>create</mat-icon></button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumnsCFG"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumnsCFG;"></tr>
+
+        </mat-table>
+        <mat-paginator #paginator
+                      [pageSize]="5"
+                      [pageSizeOptions]="[5]">
+        </mat-paginator>
+
+      </div>
+    </div>
+    
+  </div>
+</div>

@@ -1,0 +1,28 @@
+/*UPDATE editado SET COD_ITEM_PLANILHA = '' WHERE COD_ITEM_PLANILHA IS NULL
+UPDATE editado SET CCP_ICL = '' WHERE CCP_ICL IS NULL
+UPDATE editado SET Obrigatorio = '' WHERE Obrigatorio IS NULL
+UPDATE editado SET ESPECIFICACAO_Historico = '' WHERE ESPECIFICACAO_Historico IS NULL
+UPDATE editado SET U_M = '' WHERE U_M IS NULL
+UPDATE editado SET Regra_de_coleta_Automação = '' WHERE Regra_de_coleta_Automação IS NULL
+UPDATE editado SET Comentário_Ambev = '' WHERE Comentário_Ambev IS NULL
+UPDATE editado SET Frequencia_WorkFlow = '' WHERE Frequencia_WorkFlow IS NULL
+UPDATE editado SET Condições_Básicas_WorkFlow = '' WHERE Condições_Básicas_WorkFlow IS NULL
+UPDATE editado SET Condições_Especiais_WorkFlow = '' WHERE Condições_Especiais_WorkFlow IS NULL
+UPDATE editado SET Valor_coletado_WorkFlow = '' WHERE Valor_coletado_WorkFlow IS NULL
+UPDATE editado SET Ponto_Produtivo_MES = '' WHERE Ponto_Produtivo_MES IS NULL
+UPDATE editado set umID = 46 WHERE U_M = 'Unidade de Pasteurização'
+
+SELECT ed.U_M, ed.umID
+FROM editado ed
+ORDER BY ed.U_M
+
+
+UPDATE editado set tpID = 7 WHERE Tipo_Variavel = 'float'
+SELECT ed.Tipo_Variavel, ed.tpID
+FROM editado ed
+ORDER BY ed.Tipo_Variavel
+
+UPDATE editado set TipoLinha = 'Cerveja Retornável'
+
+*/
+

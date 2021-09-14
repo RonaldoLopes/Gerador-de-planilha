@@ -1,0 +1,132 @@
+<div class="container">
+    <div class="container-fluid">
+        <mat-card class="card">
+
+            <mat-card-header>
+                <mat-card-title>UM</mat-card-title> 
+                <mat-card-subtitle>Dados UMS</mat-card-subtitle>                
+            </mat-card-header>
+
+            <mat-card-content>  
+                <button mat-raised-button color="primary" tooltip="Novo dado" (click)="novaUM(template)">
+                    <mat-icon>add</mat-icon>
+                    Novo Dado
+                </button>              
+
+                <div class="table-container mat-elevation-z8">
+                    
+                    <br><br>
+                    <mat-form-field>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar Dados">
+                    </mat-form-field>
+
+                    <table mat-table [dataSource]="dataSource" matSort >
+                        <ng-container matColumnDef="id">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+                            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="descricao">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Descricao</th>
+                            <td mat-cell *matCellDef="let element"> {{element.descricao}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="sigla">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Sigla</th>
+                            <td mat-cell *matCellDef="let element"> {{element.sigla}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="opcoes">
+                            <th mat-header-cell *matHeaderCellDef mat-sort-header>Opções</th>
+                            <td mat-cell *matCellDef="let element">
+                              <button mat-raised-button color="primary" tooltip="Alterar" (click)="editarUM(element, template)"><mat-icon>create</mat-icon></button>&nbsp;
+                              <button mat-raised-button color="warn" tooltip="Excluir" (click)="excluirUM(element, confirm)"><mat-icon>delete_sweep</mat-icon></button>
+                            </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </div>
+                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+            </mat-card-content>
+
+        </mat-card>
+    </div>
+</div>
+<div bsModal #template="bs-modal" class="modal fade" tabindex="-1"
+    role="dialog" aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="dialog-sizes-name1" class="modal-title pull-left">Dados</h4>
+                <button type="button" class="close pull-right" (click)="template.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="registerForm">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Descrição</label>
+                            <input type="text" 
+                            [ngClass]="{'is-invalid': registerForm.get('descricao').errors && registerForm.get('descricao').touched}"
+                            class="form-control" formControlName="descricao" placeholder="Entre com a descricao">
+                            <div *ngIf="registerForm.get('descricao').hasError('required')" class="invalid-feedback">
+                                A descrição é obrigatória
+                            </div>
+                            <div *ngIf="registerForm.get('descricao').hasError('minlength') && registerForm.get('descricao').touched" class="invalid-feedback">
+                                Mínimo de 2 caracteres
+                            </div>
+                            <div *ngIf="registerForm.get('descricao').hasError('maxlength') && registerForm.get('descricao').touched" class="invalid-feedback">
+                                Máximo de 45 caracteres
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Sigla</label>
+                            <input type="text" 
+                            [ngClass]="{'is-invalid': registerForm.get('sigla').errors && registerForm.get('sigla').touched}"
+                            class="form-control is-invalid" formControlName="sigla" placeholder="Entre com a sigla">
+                            <div *ngIf="registerForm.get('sigla').hasError('required')" class="invalid-feedback">
+                                A sigla é obrigatória
+                            </div>
+                            <div *ngIf="registerForm.get('sigla').hasError('minlength') && registerForm.get('sigla').touched" class="invalid-feedback">
+                                Mínimo de 1 caracteres
+                            </div>
+                            <div *ngIf="registerForm.get('sigla').hasError('maxlength') && registerForm.get('sigla').touched" class="invalid-feedback">
+                                Máximo de 5 caracteres
+                            </div>
+                        </div>
+                    </div>  
+                    
+                </form>
+            </div>
+            <div class="modal-footer d-flex">
+                <button mat-raised-button color="primary" tooltip="Fechar" (click)="template.hide()"><mat-icon>close</mat-icon>Fechar</button> &nbsp;     
+                <button mat-raised-button color="primary" id="btnSalvar" [disabled] = "!registerForm.valid" tooltip="Salvar"  (click)="salvarAlteracao(template)"><mat-icon>sd_storage</mat-icon>Salvar</button> 
+            </div>
+        </div>
+    </div>
+</div>
+<div bsModal #confirm="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">
+                    Deletar configuração
+                </h4>                
+                <button type="button" class="close pull-right" (click)="confirm.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>{{bodyDeletarUm}}</p>
+            </div>    
+            <div class="modal-footer btn-group d-flex">  
+                <button mat-raised-button color="primary" tooltip="Cancelar" (click)="confirm.hide()"><mat-icon>close</mat-icon>Cancelar</button>&nbsp;  
+                <button mat-raised-button color="warn" tooltip="Excluir" (click)="confirmeDelete(confirm)"><mat-icon>delete_sweep</mat-icon>Excluir</button>
+                
+            </div>
+        </div>
+    </div>
+</div>

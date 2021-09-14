@@ -1,0 +1,9 @@
+{
+
+  "AppSettings": {
+    "Token" :  "4dm1n@R1sc$SkinGenerate"
+  },
+  "ConnectionStrings": {
+    "GeradorDB": "Server=localhost;userid=root;password=4dm1n;database=GeradorDB"
+  }
+}

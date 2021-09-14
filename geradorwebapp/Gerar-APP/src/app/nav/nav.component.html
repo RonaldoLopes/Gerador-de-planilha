@@ -1,0 +1,133 @@
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark static-top">
+  <img src="..\assets\img\risc.png" class="img-fluid" alt="Logo">
+  <div class="container">
+    <a class="navbar-brand" href="#">Gerador WEB</a>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div *ngIf="loggedIn()" class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="configuracoes">Configurações</a>
+        </li>
+
+        <li class="nav-item dropdown" dropdown>
+          <a dropdownToggle class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Ambev
+          </a>
+          <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="abvnew">
+              Novo
+            </a>
+            <div role="separator" class="divider"></div>
+            <a class="dropdown-item" routerLink="abvview">
+              Visualizar/editar
+            </a>
+          </div>
+        </li>
+
+        <li class="nav-item dropdown" dropdown>
+          <a dropdownToggle class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            PLC
+          </a>
+          <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="plcnew">
+              Novo
+            </a>
+            <div role="separator" class="divider"></div>
+            <a class="dropdown-item" routerLink="plcview">
+              Visualizar/editar
+            </a>
+          </div>
+        </li>      
+      
+        <li class="nav-item dropdown" dropdown>
+          <a dropdownToggle class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Historian
+          </a>
+          <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="histnew">
+              Novo
+            </a>
+            <div role="separator" class="divider"></div>
+            <a class="dropdown-item" routerLink="histview">
+              Visualizar/editar
+            </a>
+          </div>
+        </li> 
+
+        <li class="nav-item dropdown" dropdown>
+          <a dropdownToggle class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            IGS
+          </a>
+          <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="igsnew">
+              Novo
+            </a>
+            <div role="separator" class="divider"></div>
+            <a class="dropdown-item" routerLink="igsview">
+              Visualizar/editar
+            </a>
+          </div>
+        </li>  
+
+        <li class="nav-item dropdown" dropdown>
+          <a dropdownToggle class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            LMS
+          </a>
+          <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" routerLink="lmsnew">
+              Novo
+            </a>
+            <div role="separator" class="divider"></div>
+            <a class="dropdown-item" routerLink="lmsview">
+              Visualizar/editar
+            </a>
+          </div>
+        </li> 
+      
+        <li class="nav-item">
+          <a class="nav-link" routerLink="plan">Gerar Planilhas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="egu">EGU</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="um">UM</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" routerLink="userRegistration">Usuários</a>
+        </li>
+      
+    </ul>    
+  </div>
+  
+  <ul *ngIf="loggedIn()" class="navbar-nav">
+    <li class="nav-item dropdown" dropdown>
+      <a dropdownToggle class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+      {{userName()}}
+    </a>
+    <div *dropdownMenu class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      <a class="dropdown-item">
+        Perfil
+      </a>
+      <div role="separator" class="divider"></div>
+      <a class="dropdown-item" (click)="logout()" style="cursor: pointer;">
+        Sair
+      </a>
+    </div>
+  </li>
+</ul>
+<button *ngIf="!loggedIn()" class="btn bnt-success" (click)="entrar()">Entrar</button>
+</div>
+</nav>

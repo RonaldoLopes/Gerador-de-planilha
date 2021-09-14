@@ -1,0 +1,147 @@
+.table-container { 
+    overflow: auto;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  td.mat-column-star {
+    width: 500px;
+    padding-right: 88px;
+  }
+  
+  th.mat-column-position, td.mat-column-position {
+    padding-left: 38px;
+  }
+  th.mat-header-cell{  
+    padding: 8px 30px 8px 20px;
+  }
+  .mat-cell {
+    padding: 8px 30px 8px 20px;
+  }
+  tr.mat-footer-row,
+  tr.mat-row {
+    border: 1px solid #e7e7e7;
+    font-weight: bold;
+    height: 20px !important;
+  }
+  .mat-row:nth-child(even){
+    background-color:#FFFFFF;
+  }
+  
+  .mat-row:nth-child(odd){
+    background-color:#f8f8f8;
+  }
+  .mat-row:hover {
+    background-color: #eaeaea;
+  }
+  
+  .mat-column-id {  
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mat-column-nivelInstru {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }
+  .mat-column-lInstalacao {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }
+  .mat-column-local23NivelSAP {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }
+  .mat-column-iniciativa {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }
+  .mat-column-tagHistorian {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }
+  .mat-column-descricao {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }  
+  .mat-column-comentarioHistoria {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }
+  
+  .mat-column-validTagHistorian {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }
+  
+  .mat-column-evidencia {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }
+  .mat-column-comentaFinal {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }
+  .mat-column-collectionType {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }
+  .mat-column-collectionInterval {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }
+  .mat-column-collectorCompression {  
+    display: none;
+  }
+  .mat-column-descricao {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }  
+  .mat-column-collectorCompressorTimeOut {
+    display: none;
+  }
+  .mat-column-collectDeadPercenRange {
+    display: none;
+  }
+  .mat-column-abrevMaquina {
+    display: none;
+  }
+  .mat-column-numMaquina {
+    display: none;
+  }
+  .mat-column-plcId {
+    display: none;
+  }
+  .mat-column-configuracaoId {
+    display: none;
+  }
+  .mat-column-ambevId {
+    display: none;
+  }
+  .mat-column-umId {
+    display: none;
+  }
+  .mat-column-tipoVariavelId {
+    display: none;
+  }
+  .mat-column-Opcoes {
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }
+ 

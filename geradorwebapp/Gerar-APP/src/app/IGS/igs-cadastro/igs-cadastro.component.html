@@ -1,0 +1,344 @@
+<div class="container">
+  <div class="container-fluid">
+
+    <mat-card class="card">
+
+      <mat-card-header>
+        <mat-card-title>IGS</mat-card-title>
+        <mat-card-subtitle>Dados IGS</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <form [formGroup]="registerForm">
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <h5>Dados</h5>
+            </div> 
+            <div class="form-group col-md-12">              
+              <hr class="style1">
+            </div> 
+          </div>
+
+          <div class="form-row">
+
+            <div class="form-group input-group col-md-2">
+
+              <label for="">PLC ID</label>
+              <input type="text" class="form-control" placeholder="Id" readonly formControlName="plcId"
+              [ngClass]="{'is-invalid': registerForm.get('plcId').errors && registerForm.get('plcId').touched}">
+              <div class="input-group-append">
+                <button class="btn btn-sm btn-primary" type="button" id="pesquisarPLC"
+                  (click)="getPLC();openModalSearch(templatePLC)">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+              <div *ngIf="registerForm.get('plcId').hasError('required')" class="invalid-feedback">
+                PLC. <strong>obrigatório</strong>
+              </div>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="">Descrição</label>
+              <input type="text" class="form-control" readonly placeholder="Descrição" formControlName="plcDesc">
+            </div>
+
+            <div class="form-group col-md-2">
+              <label for="">IP</label>
+              <input type="text" class="form-control" readonly placeholder="IP" formControlName="ip">
+            </div>
+
+            <div class="form-group col-md-2">
+              <label for="">Abrev</label>
+              <input type="text" class="form-control" readonly placeholder="Abrev." formControlName="abrevPlc">
+            </div>
+
+          </div>
+
+          <div class="form-row">
+
+            <div class="form-group input-group col-md-2">
+              <label for="">Configuração ID</label>
+              <input type="text" class="form-control" placeholder="Id" readonly formControlName="configuracaoId" 
+                [ngClass]="{'is-invalid': registerForm.get('configuracaoId').errors && registerForm.get('configuracaoId').touched}">
+                <div class="input-group-append">
+                  <button class="btn btn-sm btn-primary" type="button" id="pesquisarPLC" (click)="getCFG();openModalSearch(templateCFG)">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+                <div *ngIf="registerForm.get('configuracaoId').hasError('required')" class="invalid-feedback">
+                  Config. <strong>obrigatória</strong>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+              <label for="">Planta</label>
+              <input type="text" class="form-control" readonly placeholder="Planta" formControlName="planta">
+            </div>
+
+            <div class="form-group col-md-2">
+              <label for="">Linha</label>
+              <input type="text" class="form-control" readonly placeholder="Linha" formControlName="linha">
+            </div>
+
+          </div>
+
+          <div class="form-row">
+
+            <div class="form-group col-md-12">
+              <h5>Dados Gerais</h5>
+            </div> 
+            <div class="form-group col-md-12">              
+              <hr class="style1">
+            </div> 
+
+          </div>
+
+          <div class="form-row">
+
+            <div class="form-group col-md-4">
+              <label for="">Form.Tag</label>
+              <select class="form-control"  formControlName="formTag"
+              [ngClass]="{'is-invalid': registerForm.get('formTag').errors && registerForm.get('formTag').touched}"
+              [(ngModel)]= "tagNameForm.lmsabv">
+                <option value="MES">MES</option>
+                <option value="LMS">LMS</option>
+              </select>  
+              <div *ngIf="registerForm.get('formTag').hasError('required')" class="invalid-feedback">
+                Form.Tag é. <strong>obrigatória</strong>
+              </div>                  
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="">Form.Tag Var</label>            
+              <select class="form-control" formControlName="tipoVariavelIdFT"              
+                [ngClass]="{'is-invalid': registerForm.get('tipoVariavelIdFT').errors && registerForm.get('tipoVariavelIdFT').touched}"
+                (change)="validTAGName($event)"
+                >
+                <option *ngFor="let tp of tipoVariaveis2" value="{{tp.id}}">
+                  {{tp.descricao}}
+                </option>            
+              </select>
+              <div *ngIf="registerForm.get('tipoVariavelIdFT').hasError('required')" class="invalid-feedback">
+                Form.Tag Var é <strong>obrigatório</strong>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="">TagName</label>
+              <input type="text" class="form-control" formControlName="tagName" placeholder="TagName"
+              [ngClass]="{'is-invalid': registerForm.get('tagName').errors && registerForm.get('tagName').touched}">    
+              <div *ngIf="registerForm.get('tagName').hasError('required')" class="invalid-feedback">
+                TagName é. <strong>obrigatório</strong>
+              </div>   
+              <div *ngIf="registerForm.get('tagName').hasError('minlength') && registerForm.get('tagName').touched" class="invalid-feedback">
+                Mínimo de <strong>2 caracteres</strong>
+              </div>
+              <div *ngIf="registerForm.get('tagName').hasError('maxlength') && registerForm.get('tagName').touched" class="invalid-feedback">
+                Máximo de <strong>55 caracteres</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="">Address</label>
+              <input type="text" class="form-control" formControlName="address" placeholder="Address"
+              [ngClass]="{'is-invalid': registerForm.get('address').errors && registerForm.get('address').touched}"> 
+              <div *ngIf="registerForm.get('address').hasError('required')" class="invalid-feedback">
+                Address é. <strong>obrigatório</strong>
+              </div>   
+              <div *ngIf="registerForm.get('address').hasError('minlength') && registerForm.get('address').touched" class="invalid-feedback">
+                Mínimo de <strong>2 caracteres</strong>
+              </div>
+              <div *ngIf="registerForm.get('address').hasError('maxlength') && registerForm.get('address').touched" class="invalid-feedback">
+                Máximo de <strong>20 caracteres</strong>
+              </div>
+            </div>
+
+            <div class="form-group col-md-4">
+              <label for="">Data Type</label>            
+              <select class="form-control" formControlName="tipoVariavelId"              
+                [ngClass]="{'is-invalid': registerForm.get('tipoVariavelId').errors && registerForm.get('tipoVariavelId').touched}"
+                >
+                <option *ngFor="let tp of tipoVariaveis" value="{{tp.id}}">
+                  {{tp.descricao}}
+                </option>            
+              </select>
+              <div *ngIf="registerForm.get('tipoVariavelId').hasError('required')" class="invalid-feedback">
+                Campo <strong>obrigatório</strong>
+              </div>
+            </div>
+
+            <div class="form-group col-md-2">
+              <label for="">Respect Data</label>
+              <input type="number" class="form-control" formControlName="respDataType" 
+                min="1" max="100" value="1"
+                [ngClass]="{'is-invalid': registerForm.get('respDataType').errors && registerForm.get('respDataType').touched}"> 
+            </div>
+
+          </div>
+
+          <div class="form-row">
+
+            <div class="form-group col-md-4">
+              <label for="">Client Access</label>
+              <input type="text" class="form-control" formControlName="clientAccess"
+              [ngClass]="{'is-invalid': registerForm.get('clientAccess').errors && registerForm.get('clientAccess').touched}"> 
+              <div *ngIf="registerForm.get('clientAccess').hasError('required')" class="invalid-feedback">
+                Client Access é. <strong>obrigatório</strong>
+              </div>   
+              <div *ngIf="registerForm.get('clientAccess').hasError('minlength') && registerForm.get('clientAccess').touched" class="invalid-feedback">
+                Mínimo de <strong>2 caracteres</strong>
+              </div>
+              <div *ngIf="registerForm.get('clientAccess').hasError('maxlength') && registerForm.get('clientAccess').touched" class="invalid-feedback">
+                Máximo de <strong>20 caracteres</strong>
+              </div>
+            </div>
+
+            <div class="form-group col-md-2">
+              <label for="">Scan Rate</label>
+              <input type="number" class="form-control" formControlName="scanRate" 
+                 [ngClass]="{'is-invalid': registerForm.get('scanRate').errors && registerForm.get('scanRate').touched}"
+                 > 
+                 <div *ngIf="registerForm.get('scanRate').hasError('required')" class="invalid-feedback">
+                  Scan Rate é. <strong>obrigatório</strong>
+                 </div> 
+            </div>
+
+          </div>
+
+        </form>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="salvarAlteracao()">
+          <mat-icon>sd_storage</mat-icon>Salvar Alterações
+        </button>
+      </mat-card-actions>
+    </mat-card>
+
+  </div>
+</div>
+
+<div bsModal #templatePLC="bs-modal" class="modal fade" tabindex="-1"
+     role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">Dados PLC</h4>
+        <button type="button" class="close pull-right" (click)="templatePLC.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-container">
+
+          <mat-form-field>
+            <input matInput (keyup)="applyFilterPLC($event.target.value)" placeholder="Filtrar Dados">
+          </mat-form-field>
+          <mat-table mat-table [dataSource]="dataSourcePLC" matSort>
+          
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+              <td mat-cell *matCellDef="let plc">{{plc.id}}</td>
+            </ng-container>
+  
+            <ng-container matColumnDef="ip">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>IP</th>
+              <td mat-cell *matCellDef="let plc">{{plc.ip}}</td>
+            </ng-container>
+  
+            <ng-container matColumnDef="plcDesc">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</th>
+              <td mat-cell *matCellDef="let plc">{{plc.plcDesc}}</td>
+            </ng-container>
+  
+            <ng-container matColumnDef="abrevPlc">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>AbrevPlc</th>
+              <td mat-cell *matCellDef="let plc">{{plc.abrevPLC}}</td>
+            </ng-container>
+  
+            <ng-container matColumnDef="opcoes">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Opções</th>
+              <td mat-cell *matCellDef="let plc">
+                <button mat-raised-button color="primary" tooltip="Selectionar" (click)="dadosSelecionadosPLC(plc)"><mat-icon>create</mat-icon></button>
+              </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsPLC"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsPLC;"></tr>
+  
+          </mat-table>
+          <mat-paginator #paginator3
+                      [pageSize]="5"
+                      [pageSizeOptions]="[5]">
+          </mat-paginator>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #templateCFG="bs-modal" class="modal fade" tabindex="-1"
+     role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-sizes-name1" class="modal-title pull-left">Dados Configuração</h4>
+        <button type="button" class="close pull-right" (click)="templateCFG.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="table-container">
+          <mat-form-field>
+            <input matInput (keyup)="applyFilterCFG($event.target.value)" placeholder="Filtrar Dados">
+          </mat-form-field>
+          <mat-table [dataSource]="dataSourceCfg" matSort>
+
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+              <td mat-cell *matCellDef="let cfg">{{cfg.id}}</td>
+            </ng-container>
+  
+            <ng-container matColumnDef="planta">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Planta</th>
+              <td mat-cell *matCellDef="let cfg">{{cfg.planta}}</td>
+            </ng-container>
+  
+            <ng-container matColumnDef="linha">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Linha</th>
+              <td mat-cell *matCellDef="let cfg">{{cfg.linha}}</td>
+            </ng-container>
+  
+            <ng-container matColumnDef="plantaReduzida">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>P.reduzida</th>
+              <td mat-cell *matCellDef="let cfg">{{cfg.plantaReduzida}}</td>
+            </ng-container>
+  
+            <ng-container matColumnDef="opcoes">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Opções</th>
+              <td mat-cell *matCellDef="let cfg">
+                <button mat-raised-button color="primary" tooltip="Selectionar" (click)="dadosSelecionadoConf(cfg)"><mat-icon>create</mat-icon></button>
+              </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsCFG"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumnsCFG;"></tr>
+  
+          </mat-table>
+          <mat-paginator #paginator
+                        [pageSize]="5"
+                        [pageSizeOptions]="[5]">
+          </mat-paginator>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

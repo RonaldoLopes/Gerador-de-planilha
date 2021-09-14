@@ -1,0 +1,68 @@
+
+mat-grid-tile {
+    background: lightblue;
+}
+
+table {
+    width: 100%;
+  }
+  
+  td.mat-column-star {
+    width: 500px;
+    padding-right: 88px;
+  }
+  
+  th.mat-column-position, td.mat-column-position {
+    padding-left: 38px;
+  }
+  th.mat-header-cell{  
+    padding: 8px 30px 8px 20px;
+  }
+  .mat-cell {
+    padding: 8px 30px 8px 20px;
+  }
+  tr.mat-footer-row,
+  tr.mat-row {
+    border: 1px solid #e7e7e7;
+    font-weight: bold;
+    height: 20px !important;
+  }
+  .mat-row:nth-child(even){
+    background-color:#FFFFFF;
+  }
+  
+  .mat-row:nth-child(odd){
+    background-color:#f8f8f8;
+  }
+  .mat-row:hover {
+    background-color: #eaeaea;
+  }
+  
+  .mat-column-id {  
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .mat-column-planta {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+    min-width: 200px;
+  }
+  .mat-column-linha {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+    min-width: 150px;
+  }
+  .mat-column-plantaReduzida {  
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+    min-width: 150px;
+  }
+  .mat-column-opcoes {
+    white-space: nowrap;
+    overflow: auto;
+    text-overflow: ellipsis;
+  }

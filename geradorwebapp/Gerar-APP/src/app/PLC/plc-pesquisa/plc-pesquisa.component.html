@@ -1,0 +1,146 @@
+<div class="container">
+  <div class="container-fluid">    
+    
+    <mat-card class="card">
+      
+      <mat-card-header>
+        <mat-card-title>PLCs</mat-card-title>
+        <mat-card-subtitle>Dados dos PLCS</mat-card-subtitle>
+      </mat-card-header>      
+      
+      <mat-card-content>
+
+        <button mat-raised-button color="primary" tooltip="Novo dado"  [routerLink]="['/plcnew']" tooltip="Novo Item">
+          <mat-icon>add</mat-icon>
+          Novo Dado
+        </button>
+        
+        <div class="table-container">
+
+          <br><br>
+          <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar Dados">
+          </mat-form-field>
+          
+          <mat-table mat-table [dataSource]="dataSource" matSort >
+            
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.id}} </td>
+            </ng-container>            
+            
+            <ng-container matColumnDef="plcDesc">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>PLC</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.plcDesc}} </td>
+            </ng-container>            
+            
+            <ng-container matColumnDef="ip">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>IP</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.ip}} </td>
+            </ng-container>            
+            
+            <ng-container matColumnDef="enderecoPLC">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>End.PLC</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.enderecoPLC}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="canalIGS">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Canal IGS</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.canalIGS}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="deviceIGS">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Device IGS</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.deviceIGS}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="pasta">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Pasta</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.pasta}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="tagIGS">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Tag IGS</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.tagIGS}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="enderecoOPCFull">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>End. OPC Completo</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.enderecoOPCFull}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="configuracaoId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>ID Config</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.configuracaoId}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="planta">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Planta</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.configuracao.planta}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="linha">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Linha</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.configuracao.linha}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="plantaReduzida">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Sigla</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.configuracao.plantaReduzida}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="tipoVariavelId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>ID Variável</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.tipoVariavelId}} </td>
+            </ng-container>
+            
+            <ng-container matColumnDef="descricao">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Desc. Variável</th>
+              <td mat-cell *matCellDef="let plc"> {{plc.tipoVariavel.descricao}} </td>
+            </ng-container>   
+            
+            <ng-container matColumnDef="Opcoes">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Opções</th>
+              <td mat-cell *matCellDef="let plc">
+                <button mat-raised-button color="primary" [routerLink]="['/plc', plc.id ,'edit']" tooltip="Alterar"><mat-icon>create</mat-icon></button>&nbsp;
+                <button mat-raised-button color="warn" (click)="excluirData(plc, confirm)" tooltip="Excluir"><mat-icon>delete_sweep</mat-icon></button>
+              </td>
+            </ng-container>            
+            
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </mat-table>
+        </div>
+        
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </mat-card-content>
+      
+    </mat-card>
+    
+  </div>
+</div>
+<div bsModal #confirm="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-sizes-name1">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title pull-left">
+              Deletar
+            </h4>
+            <button type="button" class="close pull-right" (click)="confirm.hide()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>{{bodyDeletarPlc}}</p>
+        </div>    
+        <div class="modal-footer btn-group d-flex">      
+            <button type="button" class="btn btn-outline-primary" (click)="confirm.hide()">
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-outline-danger" tooltip="Excluir" (click)="confirmeDelete(confirm)">
+                Deletar
+            </button>
+        </div>
+      </div>
+  </div>
+</div>

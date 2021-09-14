@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gerador.Domain", "Gerador.Domain\Gerador.Domain.csproj", "{2194BA5F-BD21-4A12-A599-977B547A37C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gerador.Repository", "Gerador.Repository\Gerador.Repository.csproj", "{A2C77516-5442-479B-8CF0-583B12A5F074}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gerador.WebAPI", "Gerador.WebAPI\Gerador.WebAPI.csproj", "{65290BBC-C8F1-4D02-A8E3-66975876DA2E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2194BA5F-BD21-4A12-A599-977B547A37C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2194BA5F-BD21-4A12-A599-977B547A37C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2194BA5F-BD21-4A12-A599-977B547A37C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2194BA5F-BD21-4A12-A599-977B547A37C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2C77516-5442-479B-8CF0-583B12A5F074}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2C77516-5442-479B-8CF0-583B12A5F074}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2C77516-5442-479B-8CF0-583B12A5F074}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2C77516-5442-479B-8CF0-583B12A5F074}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65290BBC-C8F1-4D02-A8E3-66975876DA2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65290BBC-C8F1-4D02-A8E3-66975876DA2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65290BBC-C8F1-4D02-A8E3-66975876DA2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65290BBC-C8F1-4D02-A8E3-66975876DA2E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {197F8994-70E1-465B-9B1F-005C37920BEE}
+	EndGlobalSection
+EndGlobal
